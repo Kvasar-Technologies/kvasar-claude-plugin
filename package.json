@@ -1,0 +1,49 @@
+{
+  "name": "@kvasar/claude-plugin-kvasar",
+  "version": "1.0.0",
+  "description": "Claude plugin for Kvasar Agile Management, exposing tools to interact with Kvasar platform via the CLI",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "kvasar-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "skills"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "kvasar",
+    "claude",
+    "mcp",
+    "model-context-protocol",
+    "plugin",
+    "agile",
+    "safe"
+  ],
+  "author": "Kvasar Technologies",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-code": "latest",
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "@sinclair/typebox": "^0.32.0",
+    "execa": "^8.0.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  }
+}
