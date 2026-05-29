@@ -40,7 +40,7 @@ The plugin uses the Resource Owner Password flow to obtain a JWT token and cache
 
 ## Tool Summary
 
-Over 60 tools covering:
+72 CLI-backed tools covering:
 
 - Value Streams
 - Strategic Themes & Budget
@@ -55,7 +55,7 @@ Over 60 tools covering:
 - Users
 - KPIs
 
-See `openclaw.plugin.json` for the full tool list.
+See `openclaw.plugin.json` for the full tool list and `CLI_INVENTORY.md` for the CLI command mapping.
 
 ## Skills
 
@@ -64,7 +64,28 @@ The plugin provides two skill markdown files:
 - `src/skills/agile-coach.skill.md`
 - `src/skills/portfolio-manager.skill.md`
 
-These are automatically loaded by OpenClaw and can be activated via natural language (e.g., "act as agile coach" or "give me a portfolio review").
+These are automatically loaded by OpenClaw and can be activated via natural language (e.g., "act as agile coach" or "give me a portfolio review"). The MCP server can also expose the raw skill markdown over `GET /skills` when started with `PORT=<port>`.
+
+## Claude Desktop
+
+Build the package, then point Claude Desktop at the MCP binary:
+
+```json
+{
+  "mcpServers": {
+    "kvasar": {
+      "command": "node",
+      "args": ["/absolute/path/to/kvasar-claude-plugin/dist/index.js"],
+      "env": {
+        "KVASAR_EMAIL": "you@example.com",
+        "KVASAR_PASSWORD": "your-password"
+      }
+    }
+  }
+}
+```
+
+The `kvasar` CLI must also be installed and available in `PATH` for the Claude Desktop process.
 
 ## Development
 
@@ -105,5 +126,5 @@ kvasar-claude-plugin/
 ## Notes
 
 - All tools are derived 1:1 from the official Kvasar Agile Management CLI; we do not call the REST API directly.
-- If a needed capability is missing from the CLI, it is documented in `GAPS.md` (not yet created).
+- If a needed capability is missing from the CLI, it is documented in `GAPS.md`.
 - Follows the same plugin architecture as `@kvasar/openclaw-hubspot` and `@kvasar/openclaw-git`.

@@ -4,8 +4,6 @@
  * from environment credentials KVASAR_EMAIL and KVASAR_PASSWORD.
  */
 
-const { JWT } = require('jose'); // Not needed? We just handle token.
-
 interface Tokens {
   accessToken: string;
   refreshToken: string;
@@ -45,7 +43,11 @@ async function performLogin(email: string, password: string): Promise<Tokens> {
     throw new Error(`Auth failed: ${response.status} ${response.statusText}: ${errorText}`);
   }
 
-  const data = await response.json();
+  const data = await response.json() as {
+    access_token: string;
+    refresh_token: string;
+    expires_in: number;
+  };
   const now = Math.floor(Date.now() / 1000);
   return {
     accessToken: data.access_token,
@@ -74,7 +76,11 @@ async function performRefresh(token: string): Promise<Tokens> {
     throw new Error(`Token refresh failed: ${response.status} ${response.statusText}: ${errorText}`);
   }
 
-  const data = await response.json();
+  const data = await response.json() as {
+    access_token: string;
+    refresh_token?: string;
+    expires_in: number;
+  };
   const now = Math.floor(Date.now() / 1000);
   return {
     accessToken: data.access_token,
@@ -112,7 +118,8 @@ async function ensureAuth(): Promise<void> {
       return;
     } catch (err) {
       // Refresh failed, fall back to password grant
-      console.warn('Refresh failed, attempting password login:', err.message);
+      const message = err instanceof Error ? err.message : String(err);
+      console.warn('Refresh failed, attempting password login:', message);
     }
   }
 

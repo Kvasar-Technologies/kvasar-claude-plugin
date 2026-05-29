@@ -2,7 +2,7 @@ import { defineConfig } from 'tsup';
 
 export default defineConfig({
   entry: ['src/index.ts'],
-  format: ['node'],
+  format: ['cjs'],
   target: 'node18',
   splitting: false,
   sourcemap: true,

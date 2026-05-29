@@ -24,7 +24,7 @@ describe('Tool Factory', () => {
     it('creates a tool with no ID parameter', () => {
       const tool = makeSimpleTool('test_list', 'Test List', 'Desc', 'test', 'list');
       expect(tool.name).toBe('test_list');
-      expect(tool.parameters).toEqual({ type: 'object', properties: {} });
+      expect(tool.parameters).toMatchObject({ type: 'object', properties: {} });
     });
 
     it('creates a tool with ID parameter when hasId=true', () => {

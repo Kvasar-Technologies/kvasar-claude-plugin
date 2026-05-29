@@ -1,4 +1,4 @@
-import { mkdtemp, readFile, unlink } from 'fs/promises';
+import { mkdtemp, rm, unlink, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { randomUUID } from 'crypto';
 import { tmpdir } from 'os';
@@ -12,26 +12,17 @@ export async function withTempJsonFile<T>(data: any, fn: (filePath: string) => P
   const filePath = join(dir, `${randomUUID()}.json`);
 
   try {
-    await readFile(filePath, 'utf-8'); // ensure file exists? Actually we need to write.
-  } catch {
     await writeFile(filePath, JSON.stringify(data, null, 2));
-  }
-
-  try {
     return await fn(filePath);
   } finally {
     try {
-      await unlink(filePath);
-      await fs.rmdir(dir); // remove empty dir
+      await rm(dir, { recursive: true, force: true });
     } catch {
       // ignore cleanup errors
     }
   }
 }
 
-import { writeFile, rm } from 'fs/promises';
-
-// Alternative simpler: create file and delete after.
 export async function createTempJsonFile(data: any): Promise<string> {
   const dir = await mkdtemp(join(tmpdir(), 'kvasar-plugin-'));
   const filePath = join(dir, `${randomUUID()}.json`);

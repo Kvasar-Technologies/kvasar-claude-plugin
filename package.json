@@ -9,7 +9,10 @@
   },
   "files": [
     "dist",
-    "skills"
+    "skills",
+    "src/skills",
+    "CLI_INVENTORY.md",
+    "GAPS.md"
   ],
   "scripts": {
     "build": "tsup",

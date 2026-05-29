@@ -71,7 +71,16 @@
       "arts_update",
       "teams_list",
       "teams_create",
-      "teams_update"
+      "teams_update",
+      "products_list",
+      "products_get",
+      "products_create",
+      "services_list",
+      "services_get",
+      "services_create",
+      "systems_list",
+      "systems_get",
+      "systems_create"
     ]
   }
 }
