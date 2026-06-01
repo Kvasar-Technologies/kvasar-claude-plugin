@@ -32,8 +32,7 @@ npm run build
       "command": "node",
       "args": ["/absolute/path/to/kvasar-claude-plugin/dist/index.js"],
       "env": {
-        "KVASAR_EMAIL": "you@example.com",
-        "KVASAR_PASSWORD": "your-password"
+        "KVASAR_TOKEN": "your-jwt-token"
       }
     }
   }
@@ -44,15 +43,11 @@ npm run build
 
 ## Environment Variables
 
-Set these environment variables where the MCP server runs:
+For **MCP server** operation (Claude Desktop), set:
 
-- `KVASAR_EMAIL` – Your Kvasar login email.
-- `KVASAR_PASSWORD` – Your Kvasar password.
-- `AUTH0_DOMAIN` (optional) – Defaults to `https://kvasar-pro.eu.auth0.com`.
-- `AUTH0_CLIENT_ID` (optional) – Defaults to Kvasar public client ID.
-- `AUTH0_AUDIENCE` (optional) – Defaults to `https://api.kvasar.tech/api/v1/`.
+- `KVASAR_TOKEN` – A JWT token from Kvasar API. Obtain by authenticating with the Kvasar CLI first: `kvasar auth login`. The token is automatically passed to the CLI when tools are invoked.
 
-The plugin uses the Resource Owner Password flow to obtain a JWT token and caches it in memory. The token is passed to the CLI via the `--access-token` flag on each command.
+Note: When using the `kvasar` CLI directly (outside the MCP server), authenticate normally using `kvasar auth login`.
 
 ## Tool Summary
 
@@ -93,8 +88,7 @@ Build the package, then point Claude Desktop at the MCP binary:
       "command": "node",
       "args": ["/absolute/path/to/kvasar-claude-plugin/dist/index.js"],
       "env": {
-        "KVASAR_EMAIL": "you@example.com",
-        "KVASAR_PASSWORD": "your-password"
+        "KVASAR_TOKEN": "your-jwt-token"
       }
     }
   }

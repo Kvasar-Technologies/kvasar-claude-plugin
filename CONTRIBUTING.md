@@ -48,12 +48,8 @@ npm install
 npm run dev
 ```
 
-Ensure you have the following environment variables set:
-- `KVASAR_EMAIL` - Your Kvasar login email
-- `KVASAR_PASSWORD` - Your Kvasar password
-- `AUTH0_DOMAIN` (optional) - defaults to `https://kvasar-pro.eu.auth0.com`
-- `AUTH0_CLIENT_ID` (optional)
-- `AUTH0_AUDIENCE` (optional) - defaults to `https://api.kvasar.tech/api/v1/`
+Ensure you have the following environment variable set:
+- `KVASAR_TOKEN` - A JWT token from Kvasar (obtain via `kvasar auth login`)
 
 The Kvasar CLI must be installed and available in `PATH`.
 

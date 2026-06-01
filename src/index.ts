@@ -62,13 +62,8 @@ function startHttpServer(port: number, skills: Map<string, string>) {
 }
 
 async function main() {
-  // Validate required environment variables
-  const email = process.env.KVASAR_EMAIL;
-  const password = process.env.KVASAR_PASSWORD;
-  if (!email || !password) {
-    console.error('ERROR: Missing required environment variables KVASAR_EMAIL and KVASAR_PASSWORD');
-    process.exit(1);
-  }
+  // Environment variable validation is handled by auth module
+  // (ensures KVASAR_TOKEN is set when getAuthHeader is called)
 
   // Load skill definitions
   const skills = await loadSkills();
