@@ -1,6 +1,6 @@
 # Kvasar Claude Plugin (`@kvasar/claude-plugin-kvasar`)
 
-OpenClaw plugin that exposes Kvasar Agile Management capabilities as tools for Claude. Includes two built-in skill personas:
+Claude plugin that exposes Kvasar Agile Management capabilities as tools for Claude. Includes two built-in skill personas:
 
 - **Portfolio Manager (LPM)** – Lean Portfolio Management, WSJF, budget guardrails, OKRs.
 - **Agile Coach** – SAFe coaching, PI planning, flow metrics, impediments, dependencies.
@@ -15,20 +15,36 @@ The plugin wraps the `kvasar` CLI and uses JWT authentication via email/password
 
 ## Installation
 
+### As an MCP Server for Claude Desktop
+
+1. Build the plugin:
 ```bash
-# From the plugin repository
 npm install
 npm run build
-# Then install into OpenClaw
-openclaw plugins install ./kvasar-claude-plugin
-openclaw gateway restart
 ```
 
-Alternatively, publish to npm as `@kvasar/claude-plugin-kvasar` and install with `openclaw plugins install @kvasar/claude-plugin-kvasar`.
+2. Configure Claude Desktop by adding to your `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "kvasar": {
+      "command": "node",
+      "args": ["/absolute/path/to/kvasar-claude-plugin/dist/index.js"],
+      "env": {
+        "KVASAR_EMAIL": "you@example.com",
+        "KVASAR_PASSWORD": "your-password"
+      }
+    }
+  }
+}
+```
+
+3. Restart Claude Desktop. The `kvasar` CLI must be installed and available in `PATH`.
 
 ## Environment Variables
 
-Set these on the host where OpenClaw runs:
+Set these environment variables where the MCP server runs:
 
 - `KVASAR_EMAIL` – Your Kvasar login email.
 - `KVASAR_PASSWORD` – Your Kvasar password.
@@ -55,7 +71,7 @@ The plugin uses the Resource Owner Password flow to obtain a JWT token and cache
 - Users
 - KPIs
 
-See `openclaw.plugin.json` for the full tool list and `CLI_INVENTORY.md` for the CLI command mapping.
+See `CLI_INVENTORY.md` for the full tool list and CLI command mapping.
 
 ## Skills
 
@@ -64,7 +80,7 @@ The plugin provides two skill markdown files:
 - `src/skills/agile-coach.skill.md`
 - `src/skills/portfolio-manager.skill.md`
 
-These are automatically loaded by OpenClaw and can be activated via natural language (e.g., "act as agile coach" or "give me a portfolio review"). The MCP server can also expose the raw skill markdown over `GET /skills` when started with `PORT=<port>`.
+These are loaded by the MCP server and can be activated by Claude via natural language.
 
 ## Claude Desktop
 
@@ -91,7 +107,7 @@ The `kvasar` CLI must also be installed and available in `PATH` for the Claude D
 
 ```bash
 npm install
-npm run dev      # Run directly (requires OpenClaw plugin host)
+npm run dev      # Run directly in development mode
 npm run build    # Build to dist/
 npm run test     # Run unit tests
 npm run typecheck
@@ -102,7 +118,7 @@ npm run typecheck
 ```
 kvasar-claude-plugin/
 ├── src/
-│   ├── index.ts           # Plugin entry point
+│   ├── index.ts           # MCP server entry point
 │   ├── auth.ts            # JWT auth (email+password → token)
 │   ├── client.ts          # CLI wrapper
 │   ├── tools/
@@ -117,9 +133,9 @@ kvasar-claude-plugin/
 ├── tests/
 │   ├── portfolio.tools.test.ts
 │   └── agile-coach.tools.test.ts
-├── openclaw.plugin.json
 ├── package.json
 ├── tsconfig.json
+├── tsup.config.ts
 └── README.md
 ```
 
@@ -127,4 +143,3 @@ kvasar-claude-plugin/
 
 - All tools are derived 1:1 from the official Kvasar Agile Management CLI; we do not call the REST API directly.
 - If a needed capability is missing from the CLI, it is documented in `GAPS.md`.
-- Follows the same plugin architecture as `@kvasar/openclaw-hubspot` and `@kvasar/openclaw-git`.
