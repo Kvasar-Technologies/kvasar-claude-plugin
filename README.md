@@ -15,7 +15,9 @@ The plugin wraps the `kvasar` CLI and uses JWT authentication via email/password
 
 ## Installation
 
-### As an MCP Server for Claude Desktop
+### As a Library
+
+The plugin provides a set of tools that wrap the Kvasar CLI. To use programmatically:
 
 1. Build the plugin:
 ```bash
@@ -23,31 +25,15 @@ npm install
 npm run build
 ```
 
-2. Configure Claude Desktop by adding to your `claude_desktop_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "kvasar": {
-      "command": "node",
-      "args": ["/absolute/path/to/kvasar-claude-plugin/dist/index.js"],
-      "env": {
-        "KVASAR_TOKEN": "your-jwt-token"
-      }
-    }
-  }
-}
-```
-
-3. Restart Claude Desktop. The `kvasar` CLI must be installed and available in `PATH`.
+2. Import and use the tools from the compiled output.
 
 ## Environment Variables
 
-For **MCP server** operation (Claude Desktop), set:
+When running the server, set:
 
 - `KVASAR_TOKEN` – A JWT token from Kvasar API. Obtain by authenticating with the Kvasar CLI first: `kvasar auth login`. The token is automatically passed to the CLI when tools are invoked.
 
-Note: When using the `kvasar` CLI directly (outside the MCP server), authenticate normally using `kvasar auth login`.
+Note: When using the `kvasar` CLI directly, authenticate via `kvasar auth login`.
 
 ## Tool Summary
 
@@ -75,27 +61,7 @@ The plugin provides two skill markdown files:
 - `src/skills/agile-coach.skill.md`
 - `src/skills/portfolio-manager.skill.md`
 
-These are loaded by the MCP server and can be activated by Claude via natural language.
-
-## Claude Desktop
-
-Build the package, then point Claude Desktop at the MCP binary:
-
-```json
-{
-  "mcpServers": {
-    "kvasar": {
-      "command": "node",
-      "args": ["/absolute/path/to/kvasar-claude-plugin/dist/index.js"],
-      "env": {
-        "KVASAR_TOKEN": "your-jwt-token"
-      }
-    }
-  }
-}
-```
-
-The `kvasar` CLI must also be installed and available in `PATH` for the Claude Desktop process.
+These are defined as markdown skill files.
 
 ## Development
 
@@ -112,8 +78,8 @@ npm run typecheck
 ```
 kvasar-claude-plugin/
 ├── src/
-│   ├── index.ts           # MCP server entry point
-│   ├── auth.ts            # JWT auth (email+password → token)
+│   ├── index.ts           # Plugin entry point
+│   ├── auth.ts            # JWT token auth
 │   ├── client.ts          # CLI wrapper
 │   ├── tools/
 │   │   ├── portfolio.tools.ts

@@ -13,7 +13,7 @@ This project is governed by the [Contributor Covenant Code of Conduct](CODE_OF_C
 - Check existing issues to avoid duplicates
 - Include steps to reproduce, expected vs actual behavior
 - Include relevant logs and environment details (Node version, OS)
-- Include Claude Desktop or MCP client configuration if applicable
+- Include any relevant configuration if applicable
 
 ### Suggesting Features
 
@@ -44,7 +44,7 @@ npm install
 ### Running in Development
 
 ```bash
-# Start the MCP server directly
+# Run directly in development mode
 npm run dev
 ```
 

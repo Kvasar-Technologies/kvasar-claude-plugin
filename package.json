@@ -4,10 +4,7 @@
   "description": "Claude plugin for Kvasar Agile Management, exposing tools to interact with Kvasar platform via the CLI",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "bin": {
-    "kvasar-mcp": "dist/index.js"
-  },
-   "files": [
+  "files": [
      "dist",
      "skills",
      "src/skills",
@@ -25,8 +22,6 @@
   "keywords": [
     "kvasar",
     "claude",
-    "mcp",
-    "model-context-protocol",
     "plugin",
     "agile",
     "safe"
@@ -37,8 +32,6 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@anthropic-ai/claude-code": "latest",
-    "@modelcontextprotocol/sdk": "^1.27.1",
     "@sinclair/typebox": "^0.32.0",
     "execa": "^8.0.0",
     "zod": "^3.22.0"
