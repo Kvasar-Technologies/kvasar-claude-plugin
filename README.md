@@ -2,6 +2,8 @@
 
 This Claude Code plugin manages Kvasar and Atlassian Jira through CLI tools only: `kvasar-cli` and `acli`.
 
+The plugin wraps the Kvasar CLI and uses OAuth 2.0 Device Flow authentication via Auth0, with JWT-based access tokens.
+
 ## Installation
 
 1. Clone the repository.
@@ -44,7 +46,7 @@ When this plugin is used in a skill, known model behavior is summarized below.
 
 | Model | Reported performance |
 | --- | --- |
-| `Mistralai/mistral-nemotron` | Low |
+| `Mistralai/mistal-nemotron` | Low |
 
 ## Example workflows
 
