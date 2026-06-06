@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+COMMANDS="
+  epic list|get|create|update|delete
+  feature list|get|create|update|delete
+  pi list|get|create|update|delete
+  art list|get|create|assign|unassign
+  team list|get
+  backlog list|export
+  capacity list|set
+"
+
+if [[ "${1:-}" == "--help" ]] || [[ "${1:-}" == "-h" ]]; then
+  cat <<'EOF'
+kvasar-cli - Kvasar CLI wrapper for Claude Code plugin
+
+Available command groups:
+COMMANDS_PLACEHOLDER
+
+Examples:
+  kvasar-cli epic list
+  kvasar-cli epic get KV-100
+  kvasar-cli feature create --title "..."
+EOF
+  exit 0
+fi
+
+if command -v kvasar-cli >/dev/null 2>&1; then
+  exec kvasar-cli "$@"
+fi
+
+echo "[kvasar-cli wrapper] Executable 'kvasar-cli' not found in PATH:" >&2
+echo "  Would run: kvasar-cli $*" >&2
+exit 1

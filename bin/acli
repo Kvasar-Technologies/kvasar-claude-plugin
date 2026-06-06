@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ "${1:-}" == "--help" ]] || [[ "${1:-}" == "-h" ]]; then
+  cat <<'EOF'
+acli - Atlassian CLI wrapper for Claude Code plugin
+
+Common commands:
+  acli board list
+  acli sprint list
+  acli jira issue get KEY
+  acli jira issue create ...
+  acli jira issue update KEY ...
+  acli jira sprint add-issue ...
+EOF
+  exit 0
+fi
+
+if command -v acli >/dev/null 2>&1; then
+  exec acli "$@"
+fi
+
+echo "[acli wrapper] Executable 'acli' not found in PATH:" >&2
+echo "  Would run: acli $*" >&2
+exit 1
