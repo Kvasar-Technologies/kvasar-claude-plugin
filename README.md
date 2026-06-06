@@ -1,105 +1,67 @@
-# Kvasar Claude Plugin (`@kvasar/claude-plugin-kvasar`)
+# kvasar-cli Plugin
 
-Claude plugin that exposes Kvasar Agile Management capabilities as tools for Claude. Includes two built-in skill personas:
-
-- **Portfolio Manager (LPM)** – Lean Portfolio Management, WSJF, budget guardrails, OKRs.
-- **Agile Coach** – SAFe coaching, PI planning, flow metrics, impediments, dependencies.
-
-The plugin wraps the `kvasar` CLI and uses JWT authentication via email/password (Auth0).
-
-## Prerequisites
-
-- Node.js 18+
-- Kvasar CLI installed and available in PATH (`kvasar` command). You can install it from the [Kvasar Agile Management CLI](https://github.com/Kvasar-Technologies/Kvasar-Agile-Management-CLI) repo or via npm when published.
-- Kvasar account with appropriate permissions.
+This Claude Code plugin manages Kvasar and Atlassian Jira through CLI tools only: `kvasar-cli` and `acli`.
 
 ## Installation
 
-### As a Library
+1. Clone the repository.
+2. Ensure `kvasar-cli` and `acli` are installed.
+3. Make `bin/*` executable.
+4. Load the plugin in Claude Code.
 
-The plugin provides a set of tools that wrap the Kvasar CLI. To use programmatically:
+## Plugin structure
 
-1. Build the plugin:
-```bash
-npm install
-npm run build
-```
+- `.claude-plugin/plugin.json`
+- `bin/kvasar-cli`
+- `bin/acli`
+- `skills/create-feature/SKILL.md`
+- `skills/plan-pi/SKILL.md`
+- `skills/sync-jira/SKILL.md`
+- `agents/kvasar-product-manager.md`
+- `agents/jira-manager.md`
+- `agents/release-manager.md`
 
-2. Import and use the tools from the compiled output.
+## Agents
 
-## Environment Variables
-
-When running the server, set:
-
-- `KVASAR_TOKEN` – A JWT token from Kvasar API. Obtain by authenticating with the Kvasar CLI first: `kvasar auth login`. The token is automatically passed to the CLI when tools are invoked.
-
-Note: When using the `kvasar` CLI directly, authenticate via `kvasar auth login`.
-
-## Tool Summary
-
-72 CLI-backed tools covering:
-
-- Value Streams
-- Strategic Themes & Budget
-- Solutions & Roadmaps
-- Portfolios & Epics
-- Objectives (OKRs)
-- Kanbans
-- Organizations
-- ARTs & Teams
-- Program Increments
-- Items (epics, features, stories)
-- Users
-- KPIs
-
-See `CLI_INVENTORY.md` for the full tool list and CLI command mapping.
+- Kvasar Product Manager
+- Jira Manager
+- Release Manager
 
 ## Skills
 
-The plugin provides two skill markdown files:
+- create-feature
+- plan-pi
+- sync-jira
 
-- `src/skills/agile-coach.skill.md`
-- `src/skills/portfolio-manager.skill.md`
+## Dependencies
 
-These are defined as markdown skill files.
+- Bash
+- kvasar-cli
+- acli
 
-## Development
+## Model compatibility
+When this plugin is used in a skill, known model behavior is summarized below.
 
-```bash
-npm install
-npm run dev      # Run directly in development mode
-npm run build    # Build to dist/
-npm run test     # Run unit tests
-npm run typecheck
-```
+| Model | Reported performance |
+| --- | --- |
+| `Mistralai/mistral-nemotron` | Low |
 
-## Project Structure
+## Example workflows
 
-```
-kvasar-claude-plugin/
-├── src/
-│   ├── index.ts           # Plugin entry point
-│   ├── auth.ts            # JWT token auth
-│   ├── client.ts          # CLI wrapper
-│   ├── tools/
-│   │   ├── portfolio.tools.ts
-│   │   ├── agile-coach.tools.ts
-│   │   ├── pi.tools.ts
-│   │   ├── team.tools.ts
-│   │   └── tool-factory.ts
-│   └── skills/
-│       ├── agile-coach.skill.md
-│       └── portfolio-manager.skill.md
-├── tests/
-│   ├── portfolio.tools.test.ts
-│   └── agile-coach.tools.test.ts
-├── package.json
-├── tsconfig.json
-├── tsup.config.ts
-└── README.md
-```
+# Create features from epic KV-100
+kvasar-cli epic get KV-100
+kvasar-cli feature create --epic KV-100 --title "Feature 1"
+kvasar-cli feature create --epic KV-100 --title "Feature 2"
 
-## Notes
+# Plan next PI
+kvasar-cli backlog list
+kvasar-cli pi create --name "PI-2026-03" --start 2026-04-01 --end 2026-05-31
 
-- All tools are derived 1:1 from the official Kvasar Agile Management CLI; we do not call the REST API directly.
-- If a needed capability is missing from the CLI, it is documented in `GAPS.md`.
+# Sync Kvasar backlog with Jira
+acli jira issue get PROJ-1
+kvasar-cli feature list
+acli jira issue create --project PROJ --summary "..."
+
+# Assign features to ART Alpha
+kvasar-cli art list
+kvasar-cli art assign --feature KV-101 --art ART-ALPHA
