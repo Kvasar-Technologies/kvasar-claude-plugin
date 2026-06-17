@@ -13,23 +13,23 @@ COMMANDS="
 
 if [[ "${1:-}" == "--help" ]] || [[ "${1:-}" == "-h" ]]; then
   cat <<'EOF'
-kvasar-cli - Kvasar CLI wrapper for Claude Code plugin
+kvasar - Kvasar CLI wrapper for Claude Code plugin
 
 Available command groups:
 COMMANDS_PLACEHOLDER
 
 Examples:
-  kvasar-cli epic list
-  kvasar-cli epic get KV-100
-  kvasar-cli feature create --title "..."
+  kvasar epic list
+  kvasar epic get KV-100
+  kvasar feature create --title "..."
 EOF
   exit 0
 fi
 
-if command -v kvasar-cli >/dev/null 2>&1; then
-  exec kvasar-cli "$@"
+if command -v kvasar >/dev/null 2>&1; then
+  exec kvasar "$@"
 fi
 
-echo "[kvasar-cli wrapper] Executable 'kvasar-cli' not found in PATH:" >&2
-echo "  Would run: kvasar-cli $*" >&2
+echo "[kvasar wrapper] Executable 'kvasar' not found in PATH:" >&2
+echo "  Would run: kvasar $*" >&2
 exit 1

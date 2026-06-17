@@ -11,7 +11,7 @@ Use this skill to create SAFe-compliant Kvasar features from an epic.
 1. Retrieve epic information
 2. Analyze scope
 3. Generate SAFe-compliant features
-4. Create features using kvasar-cli
+4. Create features using kvasar
 
 ## Execution guidance
 

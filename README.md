@@ -1,20 +1,20 @@
-# kvasar-cli Plugin
+# Kvasar Plugin
 
-This Claude Code plugin manages Kvasar and Atlassian Jira through CLI tools only: `kvasar-cli` and `acli`.
+This Claude Code plugin manages Kvasar and Atlassian Jira through CLI tools only: `kvasar` and `acli`.
 
 The plugin wraps the Kvasar CLI and uses OAuth 2.0 Device Flow authentication via Auth0, with JWT-based access tokens.
 
 ## Installation
 
 1. Clone the repository.
-2. Ensure `kvasar-cli` and `acli` are installed.
+2. Ensure `kvasar` and `acli` are installed.
 3. Make `bin/*` executable.
 4. Load the plugin in Claude Code.
 
 ## Plugin structure
 
 - `.claude-plugin/plugin.json`
-- `bin/kvasar-cli`
+- `bin/kvasar`
 - `bin/acli`
 - `skills/create-feature/SKILL.md`
 - `skills/plan-pi/SKILL.md`
@@ -38,7 +38,7 @@ The plugin wraps the Kvasar CLI and uses OAuth 2.0 Device Flow authentication vi
 ## Dependencies
 
 - Bash
-- kvasar-cli
+- kvasar
 - acli
 
 ## Model compatibility
@@ -51,19 +51,19 @@ When this plugin is used in a skill, known model behavior is summarized below.
 ## Example workflows
 
 # Create features from epic KV-100
-kvasar-cli epic get KV-100
-kvasar-cli feature create --epic KV-100 --title "Feature 1"
-kvasar-cli feature create --epic KV-100 --title "Feature 2"
+kvasar epic get KV-100
+kvasar feature create --epic KV-100 --title "Feature 1"
+kvasar feature create --epic KV-100 --title "Feature 2"
 
 # Plan next PI
-kvasar-cli backlog list
-kvasar-cli pi create --name "PI-2026-03" --start 2026-04-01 --end 2026-05-31
+kvasar backlog list
+kvasar pi create --name "PI-2026-03" --start 2026-04-01 --end 2026-05-31
 
 # Sync Kvasar backlog with Jira
 acli jira issue get PROJ-1
-kvasar-cli feature list
+kvasar feature list
 acli jira issue create --project PROJ --summary "..."
 
 # Assign features to ART Alpha
-kvasar-cli art list
-kvasar-cli art assign --feature KV-101 --art ART-ALPHA
+kvasar art list
+kvasar art assign --feature KV-101 --art ART-ALPHA

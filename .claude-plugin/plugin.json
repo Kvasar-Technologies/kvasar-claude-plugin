@@ -1,5 +1,20 @@
 {
-  "name": "kvasar-cli",
+  "name": "kvasar",
   "version": "1.0.0",
-  "description": "Automate SAFe planning, feature creation, and Jira sync using kvasar-cli and acli. No MCP servers required."
+  "description": "Claude Code plugin for Kvasar and Atlassian Jira using only CLI tools. No MCP servers. Runs exclusively through kvasar and acli.",
+  "entry_point": ".",
+  "bin": {
+    "kvasar": "bin/kvasar",
+    "acli": "bin/acli"
+  },
+  "skills": [
+    "skills/create-feature",
+    "skills/plan-pi",
+    "skills/sync-jira"
+  ],
+  "agents": [
+    "agents/kvasar-product-manager.md",
+    "agents/jira-manager.md",
+    "agents/release-manager.md"
+  ]
 }
