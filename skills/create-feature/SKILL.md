@@ -1,3 +1,7 @@
+---
+description: Create SAFe-compliant Kvasar features from an epic. Use when breaking down epics into features.
+---
+
 # Skill: create-feature
 
 Use this skill to create SAFe-compliant Kvasar features from an epic.
@@ -11,7 +15,7 @@ Use this skill to create SAFe-compliant Kvasar features from an epic.
 
 ## Execution guidance
 
-- First run `kvasar-cli epic list` or `kvasar-cli epic get <EPIC_ID>`.
+- First run `kvasar epic list` or `kvasar epic get <EPIC_ID>`.
 - Analyze the epic context.
 - Define feature scopes that are small enough to deliver in one PI.
-- Create features with `kvasar-cli feature create`.
+- Create features with `kvasar feature create`.
