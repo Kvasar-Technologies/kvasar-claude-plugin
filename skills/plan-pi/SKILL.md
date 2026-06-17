@@ -1,3 +1,7 @@
+---
+description: Plan a PI using backlog and capacity data. Use when planning Program Increments or assigning work to ARTs.
+---
+
 # Skill: plan-pi
 
 Use this skill to plan a PI using backlog and capacity data.

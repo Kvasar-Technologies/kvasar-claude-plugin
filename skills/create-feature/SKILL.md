@@ -1,3 +1,7 @@
+---
+description: Create SAFe-compliant Kvasar features from an epic. Use when breaking down epics into features.
+---
+
 # Skill: create-feature
 
 Use this skill to create SAFe-compliant Kvasar features from an epic.

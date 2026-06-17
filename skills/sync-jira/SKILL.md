@@ -1,3 +1,7 @@
+---
+description: Synchronize Kvasar items into Jira. Use when syncing Kvasar features or epics to Jira issues.
+---
+
 # Skill: sync-jira
 
 Use this skill to synchronize Kvasar items into Jira.
