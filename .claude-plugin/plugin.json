@@ -1,10 +1,10 @@
 {
-  "name": "kvasar-cli",
+  "name": "kvasar",
   "version": "1.0.0",
-  "description": "Claude Code plugin for Kvasar and Atlassian Jira using only CLI tools. No MCP servers. Runs exclusively through kvasar-cli and acli.",
+  "description": "Claude Code plugin for Kvasar and Atlassian Jira using only CLI tools. No MCP servers. Runs exclusively through kvasar and acli.",
   "entry_point": ".",
   "bin": {
-    "kvasar-cli": "bin/kvasar-cli",
+    "kvasar": "bin/kvasar",
     "acli": "bin/acli"
   },
   "skills": [
