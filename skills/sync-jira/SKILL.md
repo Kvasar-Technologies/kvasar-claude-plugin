@@ -12,7 +12,7 @@ Use this skill to synchronize Kvasar items into Jira.
 
 ## Execution guidance
 
-- Use `kvasar-cli feature list` or `kvasar-cli epic list`.
+- Use `kvasar feature list` or `kvasar epic list`.
 - Use `acli jira issue get` or `acli jira search`.
 - Compare identifiers and names.
 - Use `acli jira issue create` or `acli jira issue update` for changes.

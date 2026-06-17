@@ -11,7 +11,7 @@ Use this skill to plan a PI using backlog and capacity data.
 
 ## Execution guidance
 
-- Use `kvasar-cli backlog list`.
-- Use `kvasar-cli capacity list --team <TEAM_ID>`.
-- Use `kvasar-cli pi create`.
-- Use `kvasar-cli art assign`.
+- Use `kvasar backlog list`.
+- Use `kvasar capacity list --team <TEAM_ID>`.
+- Use `kvasar pi create`.
+- Use `kvasar art assign`.
